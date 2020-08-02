@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { Connection } from 'typeorm';
 declare module 'fastify' {
     interface FastifyInstance {
@@ -8,7 +7,7 @@ declare module 'fastify' {
 export declare class Main {
     static GetObject: Main;
     DateBase: Connection;
-    Fastify: import("fastify").FastifyInstance<import("http").Server, import("http").IncomingMessage, import("http").ServerResponse, import("fastify").FastifyLoggerInstance>;
+    Fastify: any;
     constructor();
-    initDateBase(): Promise<Connection>;
+    initDateBase(): unknown;
 }
