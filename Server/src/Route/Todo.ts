@@ -34,8 +34,10 @@ export const TodoPlugin: FastifyPluginAsync = async function(f,o) {
 
     f.post("/editTodo",
     async (req,rep) => {
-        let data: {msg?: string, id: string, del?: string} = <any>req.body;
+        let data: {title?: string,msg?: string, id: string, del?: boolean} = <any>req.body;
         let ToDoRep = f.DateBase.getRepository(ToDo);
+
+        f.log.info(data);
 
         if(data.id == ""){
             return {
@@ -48,12 +50,17 @@ export const TodoPlugin: FastifyPluginAsync = async function(f,o) {
             id: data.id
         })
 
+        f.log.info(<string><unknown>todo);
+
         if(todo != undefined){
             if(data.msg != undefined){
                 todo.msg = data.msg;
             }
             if(data.del != undefined){
-                todo.msg = data.del;
+                todo.del = data.del;
+            }
+            if(data.title != undefined){
+                todo.title = data.title;
             }
 
             let saved = await ToDoRep.save(todo);

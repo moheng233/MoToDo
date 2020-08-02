@@ -2,6 +2,7 @@ import fastify from 'fastify'
 import { createConnection, Connection } from 'typeorm';
 import { resolve } from 'path';
 import { TodoPlugin } from './Route/Todo';
+import fastifyCors from 'fastify-cors';
 
 declare module 'fastify' {
     interface FastifyInstance {
@@ -26,6 +27,10 @@ export class Main {
                 await this.DateBase.synchronize();
 
                 this.Fastify.decorate('DateBase', this.DateBase);
+
+                this.Fastify.register(fastifyCors,{
+                    origin: "*"
+                });
 
                 this.Fastify.register(TodoPlugin);
 
