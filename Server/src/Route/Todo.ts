@@ -18,10 +18,11 @@ export const TodoPlugin: FastifyPluginAsync = async function(f,o) {
 
     f.post("/newTodo",
     async (req,rep) => {
-        let data: {msg: string} = <any>req.body;
+        let data: {msg: string,title: string} = <any>req.body;
         let ToDoRep = f.DateBase.getRepository(ToDo);
 
         let todo = new ToDo();
+        todo.title = data.title;
         todo.msg = data.msg;
         let saved = await ToDoRep.save(todo);
 

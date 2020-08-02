@@ -7,6 +7,9 @@ export class ToDo {
     id!: string;
 
     @Column('text')
+    title: string = "";
+
+    @Column('text')
     msg: string = "";
 
     @Column('boolean')
